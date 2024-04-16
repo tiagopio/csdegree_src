@@ -2,7 +2,7 @@
  
 int main()
 {
-  int games_number;;
+  int games_number;
   
   scanf("%d", &games_number);
   
