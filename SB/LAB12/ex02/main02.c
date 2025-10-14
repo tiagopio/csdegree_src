@@ -1,31 +1,16 @@
 #include <stdio.h>
 
-
-
-extern int  a;
-
+extern int a;
 extern long b;
-
-
 
 void ex02();
 
-
-
 int main()
-
 {
+    ex02();
 
-  ex02();
+    printf("a = %d (0x%.8X)\n", a, a);
+    printf("b = %ld (0x%.16lX)\n", b, b);
 
-
-
-  printf("a = %d (0x%.8X)\n", a, a);
-
-  printf("b = %ld (0x%.16lX)\n", b, b);
-
-
-
-  return 0;
-
+    return 0;
 }
