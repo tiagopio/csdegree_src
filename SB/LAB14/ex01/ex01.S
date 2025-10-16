@@ -1,12 +1,12 @@
 .data
 
-.globl max
-.align 2
-max: .short 0
-
 .globl vet
 .align 2
 vet: .short 50, 10, 67, 42
+
+.globl max
+.align 2
+max: .short 0
 
 .text
 
@@ -16,32 +16,36 @@ ex01:
     pushq %rbp
     movq  %rsp, %rbp
 
-    # i = 0, do for
+    # Seu código aqui...
+    # char i tem 1 byte vou usar al como i
+    # init do for
     movb $0, %al
     for:
-        # comparacao
-        cmpb $4, %al
-        jge endfor
+    cmpb $4, %al # %al - 4
+    jge endfor
 
-        # bloco
-        movq $vet, %rdx
-        movsbq %al, %rcx
-        imulq $2, %rcx
-        addq %rdx, %rcx
-        movw (%rcx), %r8w
-        // aqui está o cara
+        # corpo
 
-        cmpw max, %r8w
-        jle fim
-        movw %r8w, max
+        movq $vet, %r10
+        movsbq %al, %r9
+        imulq $2, %r9
+        addq %r9, %r10
 
-        fim:
+        movw (%r10), %dx
+
+        cmpw max, %dx
+        jle endif
+        movw %dx, max
+
+        endif:
+        
+        # incrementos
         incb %al
-        # jumpa pro for dnv
-        jmp for
-    endfor:
 
-    # Seu código aqui...
+        # jump
+        jmp for
+
+    endfor:
 
     leave
     ret

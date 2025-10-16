@@ -16,24 +16,25 @@ sum:
     pushq %rbp
     movq  %rsp, %rbp
 
-    # Seu código aqui...
-    # int i = 0
-    movl $0, %ecx
-    
-    while01:
-        # fazendo a comparacao
-        cmpl $4, %ecx
-        jge endwhile01
 
-        # gambiarra
-        movq $nums, %r8 
-        movslq %ecx, %r9
-        imulq $4, %r9
-        addq %r8, %r9
-        movl (%r9), %edx
-        
+    # Seu código aqui...
+
+    # vou usar %eax como i
+    movl $0, %eax # int i = 0
+
+    while01:
+    cmpl $4, %eax
+    jge endwhile01
+    
+        # addr(nums) + (i * sizeof(T))
+        movq $nums, %r10
+        movslq %eax, %r11
+        imulq $4, %r11 
+        addq %r11, %r10
+        movl (%r10), %edx
+
         addl %edx, s
-        incl %ecx
+        incl %eax
         jmp while01
     endwhile01:
 
