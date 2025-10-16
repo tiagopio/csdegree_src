@@ -20,29 +20,38 @@ ex02:
     pushq %rbp
     movq  %rsp, %rbp
 
-    // count = 0
-    movl $0, %ecx
+    # Seu código aqui...
+    # unsigned int count = 0
+    # usar %eax
+    movl $0, %eax
 
     while:
-        movq $letters, %rax
-        movl %ecx, %edx
-        # é 1, nao precisa multiplicar
-        addq %rax, %rdx
-        movb (%rdx), %r8b
-        incl %ecx
-        
-        cmpb $0, %r8b
-        je endwhile
+    movq $letters, %r10
+    movslq %eax, %r9
+    imulq $1, %r9
+    addq %r9, %r10
+    movb (%r10), %dl
 
-        andb $1, %r8b
+    cmpb $0, %dl
+    je endwhile
 
-        cmpb $0, %r8b
-        jne else # if
+        # corpo
+        movq $letters, %r10
+        movl %eax, %ebx
+        incl %eax
+        movslq %ebx, %r9
+        imulq $1, %r9
+        addq %r9, %r10
+        movb (%r10), %dl
+
+        andb $1, %dl
+        cmpb $1, %dl
+        jne else
             incl odd
-            jmp while
-        else: # else
+            jmp endif
+        else:
             incl even
-        # count++
+        endif:
         jmp while
     endwhile:
 
