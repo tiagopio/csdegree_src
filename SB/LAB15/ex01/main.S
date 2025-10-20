@@ -1,25 +1,24 @@
 .section .rodata
 
-.align 1
-fmt: .string "Hello"
+str01: .string "Hello"
 
 .data
 
 .globl val
 .align 4
-val: .int 432
+val: .long 432
 
 .globl age
 .align 2
-age: .short 4
+age: .word 4
 
 .globl r
 .align 4
-r: .int 0
+r: .long 0
 
 .globl err
 .align 8
-err: .long 2048
+err: .quad 2048
 
 .text
 
@@ -30,22 +29,19 @@ main:
     movq  %rsp, %rbp
 
     # Seu código aqui...
-    # val = sum("Hello", val, age, &r);
-    movq $fmt, %rdi # 1o. param
-    movl val, %esi # 2o. param
-    movw age, %dx # 3o. param
-    movq $r, %rcx # 4o. param
+    movq $str01, %rdi
+    movl val, %esi
+    movw age, %dx
+    movq $r, %rcx
 
     call sum
     movl %eax, val
 
-    # show(err, val, r);
     movq err, %rdi
     movl val, %esi
     movl r, %edx
-    
     call show
-    
+
     # Faça o "return"
     movl $0, %eax
 
